@@ -44,7 +44,7 @@
                 <a class="nav-link" href="#">Link</a>
               </li>
               <li class="nav-item">
-                  <button class="btn-color btn-sm nav-link" onclick="removeall()"><b style="color: brown;" >Delete All Records</b></button>
+                  <button class="btn btn-color btn-sm nav-link" onclick="removeall()" style="border-bottom: 2px solid brown;"><b style="color: brown;" >Delete All Records</b></button>
               </li>
             </ul>
           </div>
@@ -53,8 +53,7 @@
       <!-- ------------------ My Name ----------------------------  -->
       <div class="container">
         <h1 class="myName">Project of Rana Ahsan Ansar</h1>
-        <h2 class="text-center">These are List of Taks</h2>
-
+        <h2 class="text-center">These are List of your Taks</h2>
       </div>
 <!-- ----------------------Todo List------------------------------- -->
 
@@ -68,7 +67,7 @@
           <label for="Description" class="form-label">Description</label>
           <textarea name="Description" class="form-control" id="Description" cols="30" rows="10" placeholder="Enter Discription"></textarea>
         </div> 
-        <button type="submit" id="add" class="btn btn-primary">Add</button>
+        <button type="submit" id="add" class="btn btn-color" style="border-bottom: 2px solid brown;" ><b style="color: brown;" >Add</b></button>
       <!-- adding Items in local storage -->
 
       <div id="items" class="my-4">
@@ -142,7 +141,7 @@
                 <th scope="row">${index +1}</th>
                 <td>${element[0]}</td>
                 <td>${element[1]}</td>
-                <td><button class="btn-primary btn-sm" onclick="deletedItem(${index})">Delete</button></td>
+                <td><button class="btn btn-color btn-sm" onclick="deletedItem(${index})" style="border-bottom: 2px solid brown;" ><b style="color: brown;" >Delete</b></button></td>
               </tr>
                 `;
             });
