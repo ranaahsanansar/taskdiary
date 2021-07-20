@@ -58,7 +58,7 @@
 
               </tr>
             </thead>
-            <tbody id="table">
+            <tbody id="tablebody">
               <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
@@ -81,25 +81,50 @@
     -->
 
     <!-- custom Script  -->
-<!-- add title and Description in localStorage by scripting  -->
     <script>
-        add = document.getElementById("add");
-        add.addEventListener("click" , ()=>{
+        
+        function update() {
+        //  add title and Description in localStorage by ECMAscript
             titl = document.getElementById('title').value;
             desc = document.getElementById('Description').value;
-            if (localStorage.getItem('itemsJson') == null){
-                itemJsonArray = [];
-                itemJsonArray.push([titl , desc]);
-                localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
-            }else{
-                itemJsonArrayStr = localStorage.getItem('itemsJson');
-                itemJsonArray = JSON.parse(itemJsonArrayStr);
-                itemJsonArray.push([titl , desc]);
-                localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
-            }
-
+                // if storage is not set then it will set 
+                if (localStorage.getItem('itemsJson') == null){
+                    itemJsonArray = [];
+                    itemJsonArray.push([titl , desc]);
+                    localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
+                }else{
+                    itemJsonArrayStr = localStorage.getItem('itemsJson');
+                    itemJsonArray = JSON.parse(itemJsonArrayStr);
+                    itemJsonArray.push([titl , desc]);
+                    localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
+                }
             
-        });
+            // showing Record in Table ------------------------------
+            let tableBody = document.getElementById('tablebody');
+            let str = "";
+            itemJsonArray.forEach((element, index) => {
+                str += `
+                <tr>
+                <th scope="row">${index +1}</th>
+                <td>${element[0]}</td>
+                <td>${element[1]}</td>
+                <td><button class="btn-primary btn-sm" onclick="deletedItem(${index})">Delete</button></td>
+              </tr>
+                `;
+            });
+            tableBody.innerHTML = str;
+        }
+        add = document.getElementById("add");
+        add.addEventListener("click" , update);
+        update();
+        function deletedItem(itemIndex){
+            console.log("Delete" , itemIndex);
+            itemJsonArrayStr = localStorage.getItem('itemsJson');
+            itemJsonArray = JSON.parse(itemJsonArrayStr);
+            itemJsonArray.splice(itemIndex , 1);
+            localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
+            update();
+        }
     </script>
   </body>
 </html>
