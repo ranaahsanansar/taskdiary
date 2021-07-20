@@ -26,6 +26,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
               </li>
+              <li class="nav-item">
+                  <button class="btn-primary btn-sm nav-link" onclick="removeall()">Remove All Record</button>
+              </li>
             </ul>
           </div>
         </div>
@@ -82,9 +85,8 @@
 
     <!-- custom Script  -->
     <script>
-        
-        function update() {
-        //  add title and Description in localStorage by ECMAscript
+        function getAndUpdate() {
+            //  add title and Description in localStorage by ECMAscript
             titl = document.getElementById('title').value;
             desc = document.getElementById('Description').value;
                 // if storage is not set then it will set 
@@ -98,7 +100,17 @@
                     itemJsonArray.push([titl , desc]);
                     localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
                 }
-            
+                update();
+        }
+        function update() {
+            // initializing intem stroage 
+            if (localStorage.getItem('itemsJson') == null){
+                    itemJsonArray = [];
+                    localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
+            }else{
+                    itemJsonArrayStr = localStorage.getItem('itemsJson');
+                    itemJsonArray = JSON.parse(itemJsonArrayStr);
+            }
             // showing Record in Table ------------------------------
             let tableBody = document.getElementById('tablebody');
             let str = "";
@@ -115,7 +127,7 @@
             tableBody.innerHTML = str;
         }
         add = document.getElementById("add");
-        add.addEventListener("click" , update);
+        add.addEventListener("click" , getAndUpdate );
         update();
         function deletedItem(itemIndex){
             console.log("Delete" , itemIndex);
@@ -124,6 +136,10 @@
             itemJsonArray.splice(itemIndex , 1);
             localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
             update();
+        }
+        function removeall() {
+            localStorage.clear();
+            location.reload();
         }
     </script>
   </body>
