@@ -58,7 +58,7 @@
 
               </tr>
             </thead>
-            <tbody>
+            <tbody id="table">
               <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
@@ -94,10 +94,12 @@
             }else{
                 itemJsonArrayStr = localStorage.getItem('itemsJson');
                 itemJsonArray = JSON.parse(itemJsonArrayStr);
-                itemsJsonArray.push(titl , desc);
+                itemJsonArray.push([titl , desc]);
                 localStorage.setItem('itemsJson' , JSON.stringify(itemJsonArray));
             }
-        })
+
+            
+        });
     </script>
   </body>
 </html>
